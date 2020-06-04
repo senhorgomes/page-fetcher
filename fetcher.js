@@ -11,13 +11,12 @@ const fileName = arg[3]
 //Using const to call on website and file location.
 request(website, (error, response, body) => {
   console.log('error:', error);
-  console.log('statusCode:', response && response.statusCode); 
+  console.log('statusCode:', response && response.statusCode);
+  if (!error){ 
   //Writes the body of the website onto the file.
-  fs.writeFile(fileName, body, 'utf8', (error) => {
-    if (!error){
+    fs.writeFile(fileName, body, 'utf8', (error) => {
       const stat = fs.statSync(fileName)
       console.log(`Downloaded and saved ${stat.size} bytes to ${fileName}`)
-    }
-    return console.log(error)
-  });
+    });
+  }
 });
